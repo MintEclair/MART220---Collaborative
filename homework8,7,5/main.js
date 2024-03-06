@@ -68,6 +68,7 @@ function draw() {
     if (hp <= 0) {
         points = 0;
         hp = 20;
+        deathSound.play();
     }
     /*if (flipX) {
          push();
