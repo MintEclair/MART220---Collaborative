@@ -1,0 +1,15 @@
+male\Idle (1).png
+male\Idle (2).png
+male\Idle (3).png
+male\Idle (4).png
+male\Idle (5).png
+male\Idle (6).png
+male\Idle (7).png
+male\Idle (8).png
+male\Idle (9).png
+male\Idle (10).png
+male\Idle (11).png
+male\Idle (12).png
+male\Idle (13).png
+male\Idle (14).png
+male\Idle (15).png
