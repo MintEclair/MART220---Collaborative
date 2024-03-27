@@ -1,5 +1,5 @@
 //player var
-var meX = 100,
+/*var meX = 100,
     meY = 50;
 var football;
 //enemy var
@@ -71,10 +71,10 @@ function Move() {
 }
 
 function chace() {
-    if (HeX < MeX) {
+    /*if (HeX < MeX) {
         HeX += 5;
     }
     if (HeX > MeX) {
         HeX -= 5;
     }
-}
+}/*/

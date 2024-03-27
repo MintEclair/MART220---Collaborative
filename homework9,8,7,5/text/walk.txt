@@ -1,0 +1,10 @@
+male/Walk (1).png
+male/Walk (2).png
+male/Walk (3).png
+male/Walk (4).png
+male/Walk (5).png
+male/Walk (6).png
+male/Walk (7).png
+male/Walk (8).png
+male/Walk (9).png
+male/Walk (10).png
