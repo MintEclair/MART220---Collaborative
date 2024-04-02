@@ -5,6 +5,8 @@ var pWidth = 430,
     pHeight = 519;
 var textX = 50,
     textY = 50;
+var currentX = 300,
+    currentY = 500;
 var fontType;
 var i = 0;
 var time = 10;
@@ -25,6 +27,7 @@ var pointSound;
 var pointloss;
 var deathSound;
 var meAnimations;
+const particles = [];
 
 function preload() {
     idlePath = loadStrings("../text/idle.txt");
@@ -51,8 +54,9 @@ function setup() {
     // }
 
     brains = new Sprite(300, 50, 73, 48, 'static');
-    //brains.img = "../image/brain.png";
+    brains.img = "image/brian.png";
     cherryBomb = new Sprite(300, 500, 163, 185, 'static');
+    cherryBomb.img = "image/badFood.png";
     fontType = loadFont("font/run_2/Run! Demo.otf");
 
     setInterval(UpdatePic, 50);
@@ -62,20 +66,15 @@ function setup() {
 
 function draw() {
     background(150, 55, 50);
-    if (brains != null) {
-        brains.draw();
-    }
-    if (cherryBomb != null) {
-        cherryBomb.draw();
-    }
-    if (hp > 20) {
-        hp = 20;
-    }
-    if (hp <= 0) {
-        points = 0;
-        hp = 20;
-        deathSound.play();
-    }
+    text();
+
+    /* if (brains != null) {
+         brains.draw();
+     }
+     if (cherryBomb != null) {
+         cherryBomb.draw();
+     }*/
+
     /*if (flipX) {
          push();
 
@@ -102,19 +101,54 @@ function draw() {
             console.log(pY);
             meAnimations.updatePosition("up");
             meAnimations.draw("walk");
+            if (meAnimations.isColliding(cherryBomb)) {
+                cherryBomb.remove();
+                hp--;
+                console.log("hit");
+                Boom();
+            }
+            if (meAnimations.isColliding(brains)) {
+                brains.remove();
+                hp++;
+                points++;
+                console.log("point");
+            }
         }
         if (key == "s") {
             //pY += 10;
             console.log(pY);
             meAnimations.updatePosition("down");
             meAnimations.draw("walk");
+            if (meAnimations.isColliding(cherryBomb)) {
+                cherryBomb.remove();
+                hp--;
+                console.log("hit");
+                Boom();
+            }
+            if (meAnimations.isColliding(brains)) {
+                brains.remove();
+                hp++;
+                points++;
+                console.log("point");
+            }
         }
         if (key == "a") {
             //pX -= 10;
             //console.log(xImage);
             meAnimations.updatePosition("reverse");
             meAnimations.draw("walk");
-
+            if (meAnimations.isColliding(cherryBomb)) {
+                cherryBomb.remove();
+                hp--;
+                console.log("hit");
+                Boom();
+            }
+            if (meAnimations.isColliding(brains)) {
+                brains.remove();
+                hp++;
+                points++;
+                console.log("point");
+            }
             //Idle[i].updateX(pX);
             flipX = true;
         }
@@ -122,6 +156,19 @@ function draw() {
             //pX += 10;
             meAnimations.updatePosition("forward");
             meAnimations.draw("walk");
+            if (meAnimations.isColliding(cherryBomb)) {
+                cherryBomb.remove();
+                hp--;
+                console.log("hit");
+                Boom();
+            }
+            if (meAnimations.isColliding(brains)) {
+                cherryBomb.remove();
+                hp++;
+                points++;
+                console.log("point");
+
+            }
             //console.log(i);
             // console.log()
             flipX = false;
@@ -164,6 +211,10 @@ function draw() {
     } else {
         meAnimations.draw("idle");
     }
+
+}
+
+function text() {
     fill(100, 250, 100);
     textSize(24);
     textFont(fontType);
@@ -176,6 +227,29 @@ function draw() {
     fill(100, 250, 100);
     textSize(24);
     text(meTimer + "seconds", 50, 75);
+    if (hp > 20) {
+        hp = 20;
+    }
+    if (hp <= 0) {
+        points = 0;
+        hp = 20;
+        deathSound.play();
+    }
+}
+
+function Boom() {
+    for (let i = 0; i < 50; i++) {
+        let p = new particleClass(currentX, currentY);
+        particles.push(p);
+    }
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].show();
+        if (particles[i].finished()) {
+            // remove this particle
+            particles.splice(i, 1);
+        }
+    }
 }
 
 
