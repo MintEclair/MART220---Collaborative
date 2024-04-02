@@ -21,7 +21,7 @@ class particleClass {
     show() {
         noStroke();
         stroke(225);
-        fill(random(255), random(255), random(255), this.alpha);
+        fill(100, 100, 50, this.alpha);
         ellipse(this.x, this.y, 16);
     }
 
