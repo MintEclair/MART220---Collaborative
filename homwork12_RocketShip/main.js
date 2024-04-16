@@ -1,12 +1,24 @@
 let rotationAngle = 0;
+let car;
+let donut = [];
+var donutX = 24,
+    donutY = 16;
 
 function setup() {
     createCanvas(700, 600, WEBGL);
-
+    car = loadModel("models/meCar.obj");
+    train = loadModel("models/trian.obj.obj", true);
+    donut.push(new newShapeClass("torus", 100, 50, donutX, donutY, 200, 200));
+    donut.push(new newShapeClass("torus", 100, 50, donutX, donutY, -200, 200));
+    donut.push(new newShapeClass("torus", 500, 150, donutX, donutY, 0, 0));
+    donut.push(new newShapeClass("torus", 100, 50, donutX, donutY, 200, -200));
+    donut.push(new newShapeClass("torus", 100, 50, donutX, donutY, -200, -200));
 }
 
 function draw() {
     background(100, 30, 100);
+
+
     push();
     rotateY(rotationAngle);
     normalMaterial(1, 100, 0);
@@ -67,4 +79,25 @@ function draw() {
     cone(50, -50, 20, 16, 30);
     //rotationAngle++;
     pop();
+    push();
+    rotateZ(rotationAngle);
+    rotateX(rotationAngle);
+    normalMaterial();
+    translate(-100, 0, -100);
+    model(train);
+    pop();
+    push();
+    rotateZ(rotationAngle);
+    rotateX(rotationAngle);
+    translate(100, 0, 100);
+    normalMaterial();
+    model(car);
+    pop();
+    if (mouseIsPressed) {
+        for (var i = 0; i < donut.length; i++) {
+            donut[i].draw(frameCount);
+        }
+        translate(random, random, random);
+        text("transport", -100, -100);
+    }
 }
